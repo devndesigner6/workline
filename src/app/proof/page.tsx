@@ -29,7 +29,7 @@ interface ListingsProbe {
 async function probeListings(): Promise<ListingsProbe> {
   try {
     const res = await fetch(
-      `${storeConfig.api.baseUrl}/api/explorer/listings?limit=3`,
+      `${storeConfig.api.baseUrl}/api/explorer/listings?pageSize=3`,
       { cache: "no-store" },
     );
     const body = (await res.json()) as {
@@ -185,7 +185,7 @@ export default async function ProofPage() {
           </table>
         )}
         <pre className="hw-code">
-          curl -s &quot;https://api.agenc.ag/api/explorer/listings?limit=3&quot;
+          curl -s &quot;https://api.agenc.ag/api/explorer/listings?pageSize=3&quot;
         </pre>
       </section>
 

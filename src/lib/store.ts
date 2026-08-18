@@ -34,21 +34,7 @@ import {
 } from "@tetsuo-ai/store-core/config";
 import type { SeoListing } from "@tetsuo-ai/store-core/seo";
 import { storeConfig } from "./config";
-
-/** Default localnet RPC for the gPA fallback when no indexer is configured. */
-const LOCALNET_RPC = "http://127.0.0.1:8899";
-
-/** Resolve the gPA read source URL for the configured network. */
-function rpcUrl(): string {
-  switch (storeConfig.network) {
-    case "localnet":
-      return process.env.AGENC_RPC_URL ?? LOCALNET_RPC;
-    case "devnet":
-      return process.env.AGENC_RPC_URL ?? "https://api.devnet.solana.com";
-    case "mainnet":
-      return process.env.AGENC_RPC_URL ?? "https://api.mainnet-beta.solana.com";
-  }
-}
+import { isRpcEndpoint, resolveRpcUrl } from "./rpc";
 
 /**
  * Is `api.baseUrl` a real indexer endpoint, or just the bare RPC? On localnet it
@@ -56,8 +42,13 @@ function rpcUrl(): string {
  */
 function indexerBaseUrl(): string | null {
   const baseUrl = storeConfig.api.baseUrl;
-  if (baseUrl === rpcUrl() || baseUrl === LOCALNET_RPC) return null;
-  if (baseUrl.includes("127.0.0.1") || baseUrl.includes("localhost")) return null;
+  if (isRpcEndpoint(baseUrl)) return null;
+  try {
+    const url = new URL(baseUrl);
+    if (url.hostname === "127.0.0.1" || url.hostname === "localhost") return null;
+  } catch {
+    return null;
+  }
   return baseUrl;
 }
 
@@ -131,7 +122,11 @@ async function listAll(): Promise<Array<DecodedProgramAccount<ServiceListing>>> 
     });
     return indexer.listActiveListings();
   }
-  return listActiveListings(createSolanaRpc(rpcUrl()));
+  return listActiveListings(
+    createSolanaRpc(
+      resolveRpcUrl(storeConfig.network, storeConfig.api.baseUrl, process.env.AGENC_RPC_URL),
+    ),
+  );
 }
 
 /**

@@ -82,16 +82,16 @@ export function Catalog({
       <section className="hw-hero">
         <div className="hw-hero-copy">
           <p className="hw-eyebrow">
-            agenc marketplace node <b>· solana mainnet</b>
+            FIG_001 · AGENC MARKETPLACE NODE <b>· SOLANA MAINNET</b>
           </p>
           <h1>
-            Hire AI agents. Escrow settles on-chain,{" "}
-            <span className="grad">with a receipt.</span>
+            Hire AI agents.<br />
+            <span className="grad">Escrow settles on-chain, with a receipt.</span>
           </h1>
           <p>
-            Every listing below is a live account on the AgenC protocol. A hire
-            escrows real SOL, one instruction settles four parties atomically,
-            and anyone can verify the split from the transaction alone.
+            Workline is an open registry for AI-agent services. Choose a
+            provider, fund a scoped hire in SOL, and release escrow only after
+            you accept the delivered result.
           </p>
           <div className="hw-ledger-strip" aria-label="Live marketplace stats">
             <span className="hw-ledger-item">
@@ -178,7 +178,7 @@ export function Catalog({
       </section>
 
       <div className="hw-section-head" aria-hidden>
-        <b>The book</b>
+        <b>LIVE AGENT REGISTRY</b>
         <span className="rule" />
         <span>
           {isLoading

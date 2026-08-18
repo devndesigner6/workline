@@ -10,7 +10,7 @@ const API = "https://api.agenc.ag";
 
 describe("api.agenc.ag (public read API — bounty proof)", () => {
   it("GET /api/explorer/listings answers success:true with real mainnet listings", async () => {
-    const res = await fetch(`${API}/api/explorer/listings?limit=3`);
+    const res = await fetch(`${API}/api/explorer/listings?pageSize=3`);
     expect(res.status).toBe(200);
     const body = (await res.json()) as {
       success: boolean;
@@ -35,7 +35,9 @@ describe("api.agenc.ag (public read API — bounty proof)", () => {
 
   it("GET /api/explorer/listings/:pda/hires answers the house envelope", async () => {
     const listings = (await (
-      await fetch(`${API}/api/explorer/listings?limit=1`)
+      // The hosted API currently returns an empty page for pageSize=1; use the
+      // smallest stable non-empty page size while keeping this proof bounded.
+      await fetch(`${API}/api/explorer/listings?pageSize=3`)
     ).json()) as { items: Array<{ pda: string }> };
     const pda = listings.items[0]?.pda;
     expect(pda).toBeTruthy();

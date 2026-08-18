@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "VT323";
+  src: url("/fonts/vt323.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  src: url("/fonts/source-serif-4-400.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/fonts/jetbrains-mono-400.ttf") format("truetype");
+  font-display: swap;
+  font-weight: 400;
+}
+
 /*
  * HireWire — "settlement desk" theme.
  *
@@ -32,6 +53,9 @@
  */
 :root:root,
 .agenc.agenc {
+  --font-display: "VT323", ui-monospace, monospace;
+  --font-body: "Source Serif 4", "Source Serif Pro", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
   --ink: #0c0b08;
   --ledger: #14130e;
   --ledger-2: #1b1a13;
@@ -992,4 +1016,122 @@ a {
     order: 3;
     width: 100%;
   }
+}
+
+/* ---------- Workline blueprint system ----------
+   Adapted from the approved reference design language: paper, blueprint ink,
+   display type, dotted field, and technical-rule layout. */
+:root:root,
+.agenc.agenc {
+  --ink: #1a1a1a;
+  --ledger: #f3f1e8;
+  --ledger-2: #ece9dc;
+  --rule: rgba(26, 26, 26, 0.16);
+  --rule-strong: #1a1a1a;
+  --paper: #1a1a1a;
+  --paper-muted: #4a4a4a;
+  --paper-dim: #7a7a78;
+  --amber: #3553ff;
+  --amber-deep: #2840d6;
+  --settled: #3553ff;
+  --alert: #b8870f;
+  --agenc-void: #fafaf5;
+  --agenc-surface: #f3f1e8;
+  --agenc-surface-2: #ece9dc;
+  --agenc-surface-3: #fafaf5;
+  --agenc-border: rgba(26, 26, 26, 0.16);
+  --agenc-border-strong: #1a1a1a;
+  --agenc-text: #1a1a1a;
+  --agenc-text-muted: #4a4a4a;
+  --agenc-text-dim: #7a7a78;
+  --agenc-cyan: #3553ff;
+  --agenc-violet: #3553ff;
+  --agenc-magenta: #3553ff;
+  --agenc-success: #3553ff;
+  --agenc-warning: #b8870f;
+  --agenc-danger: #b8870f;
+  --agenc-gradient-primary: #3553ff;
+  --agenc-gradient-cool: #f3f1e8;
+  --agenc-gradient-text: #3553ff;
+  --agenc-grid: rgba(26, 26, 26, 0.08);
+  --agenc-radius: 0;
+  --agenc-radius-sm: 0;
+  --agenc-radius-lg: 0;
+  --sans: var(--font-body), Georgia, serif;
+  --mono: var(--font-mono), ui-monospace, monospace;
+  --display: var(--font-display), var(--mono);
+}
+
+html,
+body {
+  background-color: #fafaf5;
+  background-image: radial-gradient(rgba(26, 26, 26, 0.08) 1px, transparent 1px);
+  background-size: 16px 16px;
+  color: #1a1a1a;
+  font-family: var(--sans);
+  font-size: 18px;
+  line-height: 1.62;
+}
+
+::selection { background: #3553ff; color: #fafaf5; }
+:focus-visible { outline-color: #3553ff; border-radius: 0; }
+
+.hw-header { background: rgba(250, 250, 245, 0.94); border-bottom-color: var(--rule); }
+.hw-header-inner, .hw-main, .hw-footer-inner { max-width: 1200px; }
+.hw-header-inner { min-height: 64px; padding: 0 2rem; }
+.hw-main { padding: 0 2rem 4rem; }
+.hw-brand { gap: 0.5rem; font-family: var(--display); border: 0; }
+.hw-brand-mark { width: 12px; height: 12px; background: #3553ff; }
+.hw-brand-name { font-family: var(--display); font-size: 1.65rem; font-weight: 400; letter-spacing: 0.04em; color: #1a1a1a; }
+.hw-brand-name em { color: #3553ff; }
+.hw-brand-tag { color: #7a7a78; padding-left: 0; font-family: var(--mono); }
+.hw-brand-tag::before { display: none; }
+.hw-nav { gap: 1.25rem; justify-content: center; flex-wrap: nowrap; }
+.hw-nav-link { padding: 0; border-radius: 0; color: #4a4a4a; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; }
+.hw-nav-link:hover, .hw-nav-link.active { color: #3553ff; background: none; }
+.hw-wallet-connect { border-radius: 0; border-color: #3553ff; color: #fafaf5; background: #3553ff; }
+.hw-wallet-connected, .hw-wallet-menu { border-radius: 0; color: #1a1a1a; background: #f3f1e8; border-color: var(--rule); box-shadow: 3px 3px 0 #1a1a1a; }
+.hw-wallet-dot { border-radius: 0; background: #3553ff; }
+
+.hw-hero { grid-template-columns: minmax(0, 1.25fr) minmax(17rem, 0.75fr); gap: 3rem; padding: 5.5rem 0 2.5rem; border-bottom: 1px solid var(--rule); }
+.hw-hero-copy { gap: 1.25rem; }
+.hw-eyebrow, .hw-section-head b { color: #3553ff; }
+.hw-eyebrow { font-size: 0.72rem; }
+.hw-eyebrow b { color: #1a1a1a; }
+.hw-hero h1 { font-family: var(--display); color: #3553ff; font-weight: 400; font-size: clamp(2.4rem, 6vw, 4.4rem); line-height: 0.9; letter-spacing: 0.02em; text-transform: uppercase; max-width: 16ch; }
+.hw-detail-head h1 { font-family: var(--display); color: #3553ff; font-weight: 400; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 0.95; letter-spacing: 0.02em; text-transform: uppercase; }
+.hw-app h2, .hw-app h3, .hw-app h4 { font-family: var(--display); font-weight: 400; letter-spacing: 0.02em; text-transform: uppercase; color: #3553ff; }
+.hw-app h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 0.95; }
+.hw-app h3 { font-size: clamp(1.2rem, 2.6vw, 1.6rem); line-height: 1; }
+.hw-app button, .hw-app input, .hw-app select, .hw-app textarea { font-family: var(--mono); }
+.hw-app .hw-panel, .hw-app .hw-table, .hw-app .hw-code { box-shadow: 3px 3px 0 #1a1a1a; }
+.hw-hero h1 .grad { color: #1a1a1a; }
+.hw-hero-copy p { color: #1a1a1a; max-width: 44ch; }
+.hw-ledger-strip { border-color: var(--rule); font-family: var(--mono); }
+.hw-ledger-item b, .hw-ledger-note a { color: #3553ff; }
+.hw-receipt, .hw-panel { border-radius: 0; background: #f3f1e8; border-color: var(--rule); box-shadow: 3px 3px 0 #1a1a1a; color: #4a4a4a; }
+.hw-receipt::before { display: none; }
+.hw-receipt-head { color: #1a1a1a; border-bottom-color: var(--rule); }
+.hw-receipt-row .v { color: #1a1a1a; }
+.hw-receipt-row.emph .k, .hw-receipt-row.emph .v, .hw-receipt-stamp, .hw-receipt-foot a { color: #3553ff; }
+
+.hw-section-head { margin-top: 2.5rem; }
+.hw-section-head .rule { border-color: #3553ff; }
+.hw-search, .hw-select, .hw-chip { border-radius: 0; background: #fafaf5; color: #1a1a1a; border-color: var(--rule); }
+.hw-search:focus { border-color: #3553ff; box-shadow: 0 0 0 2px rgba(53, 83, 255, 0.18); }
+.hw-chip.active { border-color: #3553ff; background: rgba(53, 83, 255, 0.08); color: #3553ff; }
+.hw-app .agenc-button--primary { background: #3553ff; color: #fafaf5; }
+.hw-app .agenc-listing-card { background: #f3f1e8; border-radius: 0; border-color: var(--rule); box-shadow: none; }
+.hw-app .agenc-listing-card:hover { border-color: #3553ff; transform: none; box-shadow: 3px 3px 0 #3553ff; }
+.hw-app .agenc-listing-card__title { font-family: var(--mono); color: #1a1a1a; }
+.hw-app .agenc-badge { border-radius: 0; color: #3553ff; }
+.hw-footer { background: transparent; border-top-color: var(--rule); }
+.hw-footer-inner { padding: 2rem; }
+.hw-footer-disclosure, .hw-footer-links a { color: #4a4a4a; }
+.hw-footer-links a:hover, .hw-footer-disclosure a { color: #3553ff; }
+
+@media (max-width: 720px) {
+  .hw-header-inner, .hw-main, .hw-footer-inner { padding-left: 1rem; padding-right: 1rem; }
+  .hw-nav { justify-content: flex-start; gap: 1rem; overflow-x: auto; flex-wrap: nowrap; }
+  .hw-hero { padding-top: 3.25rem; }
 }

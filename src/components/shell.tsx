@@ -37,13 +37,11 @@ export function HireWireShell({
       <header className="hw-header">
         <div className="hw-header-inner">
           <Link href="/" className="hw-brand" aria-label="Workline home">
-            <span className="hw-brand-mark" aria-hidden>
-              ⌁
-            </span>
+            <span className="hw-brand-mark" aria-hidden />
             <span className="hw-brand-name">
-              work<em>line</em>
+              WORK<em>LINE</em>
             </span>
-            <span className="hw-brand-tag">mainnet</span>
+            <span className="hw-brand-tag">node 001</span>
           </Link>
           <nav className="hw-nav" aria-label="Main">
             {NAV.map((item) => (
@@ -69,10 +67,9 @@ export function HireWireShell({
           <div className="hw-footer-col">
             <PoweredByAgenC href="/trust" newTab={false} />
             <p className="hw-footer-disclosure">
-              Workline is an independent AgenC marketplace node. Every hire made
-              through this store routes a {(referrerFeeBps / 100).toFixed(1)}%
-              on-chain referral fee to the store wallet via the protocol&apos;s
-              atomic 4-way settlement split —{" "}
+              Workline is an AgenC marketplace node on Solana mainnet. Every
+              hire routes a {(referrerFeeBps / 100).toFixed(1)}% on-chain
+              referral fee through the protocol&apos;s atomic 4-way settlement split —{" "}
               <Link href="/trust">full disclosure</Link>.
             </p>
           </div>

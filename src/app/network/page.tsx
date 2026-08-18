@@ -24,7 +24,7 @@ interface BookAggregate {
 async function loadBook(): Promise<BookAggregate> {
   try {
     const res = await fetch(
-      `${storeConfig.api.baseUrl}/api/explorer/listings?limit=100`,
+      `${storeConfig.api.baseUrl}/api/explorer/listings?pageSize=100`,
       { cache: "no-store" },
     );
     const body = (await res.json()) as {
